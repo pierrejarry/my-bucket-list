@@ -30,6 +30,22 @@ body {
 }
 
 /* Buttons */
+button {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
 .btn-container {
   display: flex;
   gap: 1rem;
@@ -58,4 +74,12 @@ body {
     border-color: #079992;
     color: #079992;
   }
+}
+
+/* Add new item */
+
+.new-item-container {
+  display: flex;
+  gap: .5rem;
+  margin-top: 1rem;
 }

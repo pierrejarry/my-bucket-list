@@ -1,5 +1,6 @@
 import { useBucketList } from './context/bucketListContext'
 import ChooseBucketListTitle from './layout/ChooseBucketListTitle';
+import BucketList from './layout/BucketList';
 import './App.css'
 
 function App() {
@@ -9,10 +10,7 @@ function App() {
     <>
       {!showList ?
         <ChooseBucketListTitle /> :
-        <>
-          <h1>{title}</h1>
-          <p>Bucket list here...</p>
-        </>
+        <BucketList />
       }
     </>
   )

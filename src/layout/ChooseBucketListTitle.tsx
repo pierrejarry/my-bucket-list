@@ -34,6 +34,7 @@ function ChooseBucketListTitle() {
                         type='primary'
                         title='Validate title'
                         text='Validate'
+                        disabled={title === ''}
                         action={showBucketList}
                     />
                 </div>
