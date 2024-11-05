@@ -1,15 +1,19 @@
 import { useBucketList } from './context/bucketListContext'
+import ChooseBucketListTitle from './context/components/ChooseBucketListTitle';
 import './App.css'
 
 function App() {
+  const { title, showList } = useBucketList();
+
   return (
     <>
-      <h1>Choose a name for you Bucket List</h1>
-      <input type='text' className='input' placeholder='My Bucket List' />
-      <div className='btn-container'>
-        <button className='secondary' title='Empty textfield'>Reset</button>
-        <button className='primary' title='Validate title'>Validate</button>
-      </div>
+      {!showList ?
+        <ChooseBucketListTitle /> :
+        <>
+          <h1>{title}</h1>
+          <p>Bucket list here...</p>
+        </>
+      }
     </>
   )
 }

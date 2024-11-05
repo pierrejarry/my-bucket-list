@@ -8,9 +8,11 @@ interface ListElement {
 
 interface BucketListContextType {
     title: string;
-    setTitle: Dispatch<SetStateAction<string>>;
     list: ListElement[];
+    showList: boolean;
+    setTitle: Dispatch<SetStateAction<string>>;
     setList: Dispatch<SetStateAction<ListElement[]>>;
+    setShowList: Dispatch<SetStateAction<boolean>>;
 }
 
 // Create the context with a default value of undefined
@@ -19,13 +21,16 @@ const BucketListContext = createContext<BucketListContextType | undefined>(undef
 export const BucketListProvider = ({ children }: { children: ReactNode }) => {
     const [title, setTitle] = useState('');
     const [list, setList] = useState<ListElement[]>([]);
+    const [showList, setShowList] = useState(false);
 
     return (
         <BucketListContext.Provider value={{
             title,
             list,
+            showList,
             setTitle,
-            setList
+            setList,
+            setShowList
         }}>
             {children}
         </BucketListContext.Provider>
