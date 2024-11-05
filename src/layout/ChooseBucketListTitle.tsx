@@ -1,12 +1,10 @@
-import { useBucketList } from "../bucketListContext"
+import { useBucketList } from "../context/bucketListContext"
+import Button from "../components/Button";
 
 function ChooseBucketListTitle() {
     const { 
         title,
-        list,
-        showList,
         setTitle, 
-        setList,
         setShowList 
     } = useBucketList();
 
@@ -21,23 +19,23 @@ function ChooseBucketListTitle() {
                 <input
                     type='text'
                     className='input'
-                    placeholder='My Bucket List'
+                    placeholder='Example: My Bucket List'
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
                 <div className='btn-container'>
-                    <button
-                        type='reset'
-                        className='secondary-btn'
+                    <Button 
+                        type='secondary'
                         title='Empty textfield'
-                        onClick={() => setTitle('')}
-                    >Reset</button>
-                    <button
-                        type='submit'
-                        className='primary-btn'
+                        text='Reset'
+                        action={() => setTitle('')}
+                    />
+                    <Button 
+                        type='primary'
                         title='Validate title'
-                        onClick={showBucketList}
-                    >Validate</button>
+                        text='Validate'
+                        action={showBucketList}
+                    />
                 </div>
             </form>
         </>

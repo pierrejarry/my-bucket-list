@@ -1,5 +1,5 @@
 import { useBucketList } from './context/bucketListContext'
-import ChooseBucketListTitle from './context/components/ChooseBucketListTitle';
+import ChooseBucketListTitle from './layout/ChooseBucketListTitle';
 import './App.css'
 
 function App() {
