@@ -19,8 +19,9 @@ function ChooseBucketListTitle() {
     }
 
     return (
-        <>
-            <h1>Choose a name for you Bucket List</h1>
+        <section>
+            <h1>My Bucket List</h1>
+            <h2>Choose a name</h2>
             <form>
                 <input
                     type='text'
@@ -46,7 +47,7 @@ function ChooseBucketListTitle() {
                     />
                 </div>
             </form>
-        </>
+        </section>
     )
 }
 

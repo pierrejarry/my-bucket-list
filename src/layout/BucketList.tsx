@@ -7,10 +7,8 @@ import './BucketList.css'
 function BucketList() {
     const { title, list } = useBucketList();
 
-
-
     return (
-        <div className="bucket-list">
+        <section className="bucket-list">
             <h1>{title}</h1>
             <AddNewItem />
             {!list.length ?
@@ -29,7 +27,7 @@ function BucketList() {
                     )}
                 </ul>
             }
-        </div>
+        </section>
     )
 }
 
