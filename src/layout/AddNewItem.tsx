@@ -1,12 +1,29 @@
 import { useState } from "react";
+import { useBucketList } from "../context/bucketListContext";
 import Button from "../components/Button"
 
 function AddNewItem() {
+    const { setList } = useBucketList();
     const [elementDescription, setElementDescription] = useState('');
     const [showNewItem, setShowNewItem] = useState(false);
 
     const addItemToBucketList = () => {
-        console.log('add item');
+        const newItem = {
+            checked: false,
+            description: elementDescription
+        }
+        setList( prevList => [
+            newItem,
+            ...prevList
+            
+        ]);
+        setShowNewItem(false);
+        setElementDescription('');
+    }
+
+    const cancelBucketListElement = () => {
+        setShowNewItem(false);
+        setElementDescription('');
     }
 
     return (
@@ -19,6 +36,7 @@ function AddNewItem() {
                 action={() => setShowNewItem(true)}
                 disabled={showNewItem}
             />
+
             {showNewItem &&
                 <div className='new-item-container'>
                     <input
@@ -32,7 +50,7 @@ function AddNewItem() {
                         type='secondary'
                         title='Cancel'
                         text='Cancel'
-                        action={() => setShowNewItem(false)}
+                        action={cancelBucketListElement}
                     />
                     <Button
                         type='primary'

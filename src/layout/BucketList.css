@@ -1,0 +1,100 @@
+.bucket-list {
+    margin: 0 auto;
+    max-width: 80%;
+    width: 100%;
+
+    .empty-list {
+        padding: 1rem;
+
+        .empty-icon {
+            width: 5rem;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            border-bottom: 1px solid #ccc;
+            padding: 1rem;
+
+            &:last-child {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+/* Checkbox */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: .75rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+    background-color: var(--primary-color);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: .5rem;
+    top: .25rem;
+    width: .5rem;
+    height: .75rem;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@media only screen and (min-width: 1200px) {
+    .bucket-list {
+        max-width: 60%;
+    }
+}

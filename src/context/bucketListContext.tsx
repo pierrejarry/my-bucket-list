@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
 
 // Define types
-interface ListElement {
+export interface ListElement {
     checked: boolean;
     description: string;
 }
