@@ -1,6 +1,6 @@
 import { useBucketList } from '../context/bucketListContext';
 import { ListElement } from '../context/bucketListContext'
-
+import './Checkbox.css'
 interface CheckBoxProps {
     item: ListElement, 
     index: number
@@ -24,6 +24,7 @@ function CheckBox({item, index}: CheckBoxProps) {
             {item.description}
             <input type="checkbox" checked={item.checked} onChange={() => toggleCheck(index)} />
             <span className="checkmark"></span>
+            <p className={`info ${item.checked ? 'uncheck' : 'check'}`}>{item.checked ? 'Uncheck element' : 'Check element'}</p>
         </label>
     )
 }
