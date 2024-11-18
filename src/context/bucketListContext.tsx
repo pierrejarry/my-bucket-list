@@ -1,4 +1,11 @@
-import { createContext, useContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
+import { 
+    createContext, 
+    useContext, 
+    ReactNode, 
+    useEffect,
+    useState, 
+    Dispatch, 
+    SetStateAction } from "react";
 
 // Define types
 export interface ListElement {
@@ -10,9 +17,11 @@ interface BucketListContextType {
     title: string;
     list: ListElement[];
     showList: boolean;
+    showToaster: boolean;
     setTitle: Dispatch<SetStateAction<string>>;
     setList: Dispatch<SetStateAction<ListElement[]>>;
     setShowList: Dispatch<SetStateAction<boolean>>;
+    setShowToaster: Dispatch<SetStateAction<boolean>>;
 }
 
 // Create the context with a default value of undefined
@@ -22,15 +31,28 @@ export const BucketListProvider = ({ children }: { children: ReactNode }) => {
     const [title, setTitle] = useState('');
     const [list, setList] = useState<ListElement[]>([]);
     const [showList, setShowList] = useState(false);
+    const [showToaster, setShowToaster] = useState(false);
+
+    useEffect(() => {
+        const storedBucketList = sessionStorage.getItem('myBucketList');
+        if (storedBucketList) {
+            const bucketList = JSON.parse(storedBucketList);
+            setList(bucketList.list);
+            setTitle(bucketList.title);
+            setShowList(true);
+        }
+      }, []);
 
     return (
         <BucketListContext.Provider value={{
             title,
             list,
             showList,
+            showToaster,
             setTitle,
             setList,
-            setShowList
+            setShowList,
+            setShowToaster
         }}>
             {children}
         </BucketListContext.Provider>

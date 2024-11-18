@@ -27,53 +27,6 @@ section {
   }
 }
 
-/* Buttons */
-button {
-  align-items: center;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-
-  &.full-width {
-    width: 100%;
-  }
-
-  &[disabled] {
-    opacity: 0.6;
-    pointer-events: none;
-  }
-}
-
-.btn-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 1rem;
-}
-
-.primary-btn {
-  background-color: var(--primary-color);
-  color: white;
-  transition: .25s all;
-
-  &:hover {
-    border-color: var(--primary-color);
-    opacity: .8;
-  }
-}
-
-.secondary-btn {
-  background-color: white;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  transition: .25s all;
-
-  &:hover {
-    border-color: #079992;
-    color: #079992;
-  }
-}
-
 /* Add new item */
 
 .new-item-container {
