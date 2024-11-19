@@ -58,7 +58,7 @@ function BucketList() {
                         {/* Cancel changes */}
                         <Button 
                             type='secondary'
-                            text='Cancel'
+                            text='Cancel changes'
                             title="Cancel changes button"
                             action={cancelChanges}
                         />
