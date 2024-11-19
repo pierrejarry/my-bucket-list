@@ -15,10 +15,12 @@ export interface ListElement {
 
 interface BucketListContextType {
     title: string;
+    description: string;
     list: ListElement[];
     showList: boolean;
     showToaster: boolean;
     setTitle: Dispatch<SetStateAction<string>>;
+    setDescription: Dispatch<SetStateAction<string>>;
     setList: Dispatch<SetStateAction<ListElement[]>>;
     setShowList: Dispatch<SetStateAction<boolean>>;
     setShowToaster: Dispatch<SetStateAction<boolean>>;
@@ -29,6 +31,7 @@ const BucketListContext = createContext<BucketListContextType | undefined>(undef
 
 export const BucketListProvider = ({ children }: { children: ReactNode }) => {
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [list, setList] = useState<ListElement[]>([]);
     const [showList, setShowList] = useState(false);
     const [showToaster, setShowToaster] = useState(false);
@@ -46,10 +49,12 @@ export const BucketListProvider = ({ children }: { children: ReactNode }) => {
     return (
         <BucketListContext.Provider value={{
             title,
+            description,
             list,
             showList,
             showToaster,
             setTitle,
+            setDescription,
             setList,
             setShowList,
             setShowToaster

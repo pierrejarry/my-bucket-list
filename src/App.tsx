@@ -13,7 +13,10 @@ function App() {
         <ChooseBucketListTitle /> :
         <BucketList />
       }
-      {showToaster && <Toaster text='Saved'/>}
+      <Toaster 
+        text='Saved'
+        show={showToaster}
+      />
     </>
   )
 }

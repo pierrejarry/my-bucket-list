@@ -7,7 +7,15 @@ import './BucketList.css'
 import Button from "../components/Button";
 
 function BucketList() {
-    const { title, list, setList, setTitle, setShowList, setShowToaster } = useBucketList();
+    const { 
+        title, 
+        description, 
+        list,   
+        setList, 
+        setTitle, 
+        setShowList, 
+        setShowToaster 
+    } = useBucketList();
     const previousList: ListElement[] = useMemo(() => list, []);
     const sessionStorageName = 'myBucketList';
 
@@ -20,7 +28,7 @@ function BucketList() {
         setShowToaster(true); // Show toaster
         setTimeout(() => { // Reinitialize toaster to false
             setShowToaster(false);
-          }, 1000);
+          }, 1500);
     }
 
     const cancelChanges = () => {
@@ -43,6 +51,7 @@ function BucketList() {
     return (
         <section className="bucket-list">
             <h1>{title}</h1>
+            <p>{description}</p>
             {!list.length &&
                 <div className="empty-list">
                     <img src={NoTask} className="empty-icon" alt="Empty list icon" />

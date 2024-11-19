@@ -32,6 +32,11 @@ form {
   margin-top: 2rem;
   text-align: left;
 
+  fieldset {
+    border: 0;
+    margin-bottom: 1rem;
+  }
+
   label {
     display: block;
     font-weight: 600;

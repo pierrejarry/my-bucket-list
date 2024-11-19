@@ -5,6 +5,14 @@
     box-shadow: .15rem .15rem .5rem 0 rgba(0,0,0,0.25);
     padding: .5rem 1rem;
     position: fixed;
-    right: 1rem;
     top: 1rem;
+    transition: .5s all;
+
+    &.hidden {
+        right: -10rem;
+    }
+
+    &.show {
+        right: 1rem;
+    }
 }

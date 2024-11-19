@@ -1,8 +1,13 @@
 import './Toaster.css'
 
-function Toaster({text}: {text: string}) {
+interface ToasterProps {
+  text: string
+  show: boolean
+}
+
+function Toaster({text, show}: ToasterProps) {
   return (
-    <div className='toaster'>
+    <div className={`toaster ${show ? 'show' : 'hidden'}`}>
         {text}
     </div>
   )
