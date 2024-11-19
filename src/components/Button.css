@@ -40,6 +40,7 @@ button {
 
       &.add-btn {
         color: var(--body-color);
+        margin-top: 1rem;
       }
 
       &.delete-btn {

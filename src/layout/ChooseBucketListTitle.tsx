@@ -21,10 +21,12 @@ function ChooseBucketListTitle() {
     return (
         <section>
             <h1>My Bucket List</h1>
-            <h2>Choose a name</h2>
+            <p>Create and track your life goals and adventures with our Bucket List app. Whether it's traveling the world, learning new skills, or achieving personal milestones, our app helps you organize, prioritize, and celebrate your dreams—all in one place!</p>
             <form>
+                <label htmlFor='bucket-list-title'>Choose a name for your Bucket List</label>
                 <input
                     type='text'
+                    id='bucket-list-title'
                     className='input'
                     placeholder='Example: My Bucket List'
                     value={title}

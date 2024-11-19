@@ -27,6 +27,18 @@ section {
   }
 }
 
+/* Form */
+form {
+  margin-top: 2rem;
+  text-align: left;
+
+  label {
+    display: block;
+    font-weight: 600;
+    padding-bottom: .25rem;
+  }
+}
+
 /* Add new item */
 
 .new-item-container {

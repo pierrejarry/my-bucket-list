@@ -43,12 +43,15 @@ function BucketList() {
     return (
         <section className="bucket-list">
             <h1>{title}</h1>
-            <AddNewItem />
-            {!list.length ?
+            {!list.length &&
                 <div className="empty-list">
-                    <p>Your Bucket List is empty! Let's start by adding a new item below.</p>
                     <img src={NoTask} className="empty-icon" alt="Empty list icon" />
-                </div> :
+                    <h2>Your Bucket List is empty!</h2> 
+                    <p>Start your journey by adding your first dream or goal! Big or small, every item is a step towards making your bucket list truly yours. What’s the first adventure you’d love to check off?</p>
+                </div>
+            }
+            <AddNewItem />
+            {list.length > 0 &&
                 <>
                     <ul>
                         {list.map((item, index) =>
