@@ -25,6 +25,12 @@ function BucketList() {
 
     const cancelChanges = () => {
         setList(previousList);
+
+        if (!previousList.length) {
+            sessionStorage.removeItem(sessionStorageName);
+        } else {
+            sessionStorage.setItem(sessionStorageName, JSON.stringify(previousList));
+        }
     }
 
     const deleteBucketList = () => {

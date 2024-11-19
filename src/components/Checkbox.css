@@ -54,37 +54,43 @@
         width: 1.5rem;
 
         &:after {
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            content: "";
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            display: none;
-            height: .75rem;
             left: .5rem;
-            position: absolute;
             top: .25rem;
             width: .5rem;
+            height: .75rem;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
             transform: rotate(45deg);
         }
     }
-
+    
     /* Hover state */
     &:hover {
         .info {
             opacity: 1;
             visibility: visible;
         }
+
         input~.checkmark {
             border-color: var(--primary-color);
         }
-        input:checked~.checkmark {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
+    }
+
+    input:checked~.checkmark {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
     }
 
     input:checked~.checkmark:after {
         display: block;
     }
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
 }
