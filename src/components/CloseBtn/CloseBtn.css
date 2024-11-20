@@ -1,0 +1,31 @@
+.closeBtn {
+    background: transparent;
+    height: 1.5rem;
+    opacity: 0.3;
+    padding: 0;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 1.5rem;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        content: ' ';
+        height: 1.5rem;
+        width: 2px;
+        background-color: #333;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
+}

@@ -1,0 +1,29 @@
+.backdrop {
+    background-color: rgba(0,0,0,0.55);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.modal {
+    background-color: white;
+    position: fixed;
+    left: 50%;
+    max-width: 25rem;
+    padding: 1rem 0;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+
+    h3 {
+        padding: 0 3rem;
+    }
+
+    .btn-container {
+        border-top: 1px solid var(--border-color);
+        margin-top: 2rem;
+        padding-top: 2rem;
+    }
+}

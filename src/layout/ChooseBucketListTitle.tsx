@@ -1,5 +1,5 @@
 import { useBucketList } from "../context/bucketListContext"
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 
 function ChooseBucketListTitle() {
     const {

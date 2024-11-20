@@ -39,6 +39,11 @@
         &.check {
             color: var(--primary-color);
         }
+
+        &.visible {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 
     /* Create a custom checkbox */
