@@ -7,14 +7,14 @@ import './BucketList.css'
 import Button from "../components/Button";
 
 function BucketList() {
-    const { 
-        title, 
-        description, 
-        list,   
-        setList, 
-        setTitle, 
-        setShowList, 
-        setShowToaster 
+    const {
+        title,
+        description,
+        list,
+        setList,
+        setTitle,
+        setShowList,
+        setShowToaster
     } = useBucketList();
     const previousList: ListElement[] = useMemo(() => list, []);
     const sessionStorageName = 'myBucketList';
@@ -22,13 +22,14 @@ function BucketList() {
     const saveList = () => {
         const bucketListToSave = {
             title,
+            description,
             list
         }
         sessionStorage.setItem(sessionStorageName, JSON.stringify(bucketListToSave));
         setShowToaster(true); // Show toaster
         setTimeout(() => { // Reinitialize toaster to false
             setShowToaster(false);
-          }, 1500);
+        }, 1500);
     }
 
     const cancelChanges = () => {
@@ -50,16 +51,18 @@ function BucketList() {
 
     return (
         <section className="bucket-list">
-            <h1>{title}</h1>
-            <p>{description}</p>
+            <header>
+                <h1>{title}</h1>
+                <p className="description">{description}</p>
+            </header>
+            <AddNewItem />
             {!list.length &&
                 <div className="empty-list">
                     <img src={NoTask} className="empty-icon" alt="Empty list icon" />
-                    <h2>Your Bucket List is empty!</h2> 
-                    <p>Start your journey by adding your first dream or goal! Big or small, every item is a step towards making your bucket list truly yours. What’s the first adventure you’d love to check off?</p>
+                    <h2>Your Bucket List is empty!</h2>
+                    <p className="description">Start your journey by adding your first dream or goal! Big or small, every item is a step towards making your bucket list truly yours. What’s the first adventure you’d love to check off?</p>
                 </div>
             }
-            <AddNewItem />
             {list.length > 0 &&
                 <>
                     <ul>
@@ -74,21 +77,21 @@ function BucketList() {
                     </ul>
                     <div className='btn-container flex-start'>
                         {/* Cancel changes */}
-                        <Button 
+                        <Button
                             type='secondary'
                             text='Cancel changes'
                             title="Cancel changes button"
                             action={cancelChanges}
                         />
                         {/* Save changes */}
-                        <Button 
+                        <Button
                             type='primary'
                             text='Save'
                             title="Save Changes button"
                             action={saveList}
                         />
                         {/* Remove Bucket List */}
-                        <Button 
+                        <Button
                             type='delete'
                             text='Delete Bucket List'
                             title='Delete Bucket List'

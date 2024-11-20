@@ -1,9 +1,18 @@
 .bucket-list {
+
+    header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+    }
+
     .empty-list {
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+        border-radius: .5rem;
+        margin: 2rem 0 0;
         padding: 1rem;
 
         .empty-icon {
-            width: 5rem;
+            width: 4rem;
         }
     }
 
@@ -12,7 +21,6 @@
         padding: 0;
 
         li {
-            border-bottom: 1px solid #ccc;
             padding: 1rem;
 
             &:last-child {

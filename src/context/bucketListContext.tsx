@@ -42,6 +42,7 @@ export const BucketListProvider = ({ children }: { children: ReactNode }) => {
             const bucketList = JSON.parse(storedBucketList);
             setList(bucketList.list);
             setTitle(bucketList.title);
+            setDescription(bucketList.description);
             setShowList(true);
         }
       }, []);

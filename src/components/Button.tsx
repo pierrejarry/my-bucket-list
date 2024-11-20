@@ -40,7 +40,6 @@ function Button({
       disabled={disabled}
     >
       {text} 
-      {type === 'add' && <img src={Add} alt='Add icon' />}
     </button>
   )
 }

@@ -13,7 +13,7 @@ section {
 }
 
 .input {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: .5rem;
   display: block;
   font-size: 1rem;
@@ -22,14 +22,15 @@ section {
 
   &:focus,
   &:focus-visible {
-
     outline: 2px solid #333;
   }
 }
 
 /* Form */
 form {
+  border-top: 1px solid var(--border-color);
   margin-top: 2rem;
+  padding-top: 2rem;
   text-align: left;
 
   fieldset {
@@ -49,7 +50,7 @@ form {
 .new-item-container {
   display: flex;
   gap: .5rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 @media only screen and (min-width: 1200px) {

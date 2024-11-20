@@ -36,7 +36,7 @@ function ChooseBucketListTitle() {
                         onChange={e => setTitle(e.target.value)}
                         onKeyDown={showBucketListOnEnter}
                     />
-                    </fieldset>
+                </fieldset>
                 <fieldset>
                     <label htmlFor='bucket-list-description'>Add a description (optional)</label>
                     <input

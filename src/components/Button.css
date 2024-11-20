@@ -39,8 +39,15 @@ button {
       }
 
       &.add-btn {
-        color: var(--body-color);
+        background-color: var(--body-color);
+        border: 1px solid var(--body-color);
         margin-top: 1rem;
+        transition: .5s all;
+
+        &:hover {
+          background-color: white;
+          color: var(--body-color);
+        }
       }
 
       &.delete-btn {

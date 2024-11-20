@@ -30,8 +30,8 @@ function AddNewItem() {
         <>
             <Button
                 type='add'
-                title='Add item'
-                text='Add'
+                title='Add new element'
+                text='Add new element'
                 fullWidth={true}
                 action={() => setShowNewItem(true)}
                 disabled={showNewItem}
