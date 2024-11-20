@@ -10,13 +10,10 @@ interface ModalProps {
 }
 
 function Modal({ show, text, hasButtons }: ModalProps) {
-    const sessionStorageName = 'myBucketList';
-    const { modal, setModal, setList, setTitle, setShowList } = useBucketList();
-
-    
+    const { modal, setModal } = useBucketList();
 
     const hideModal = () => {
-        setModal( prevState => ({
+        setModal(prevState => ({
             ...prevState,
             show: false
         }))

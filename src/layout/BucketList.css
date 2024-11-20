@@ -21,15 +21,21 @@
         padding: 0;
 
         li {
+            border: 1px solid transparent;
             border-radius: .5rem;
-            padding: 1rem;
+            margin-bottom: .5rem;
+            padding: .5rem 1rem;
 
             &:last-child {
                 margin-bottom: 1rem;
             }
 
+            &:hover {
+                border-color: var(--border-color);
+            }
+
             &.completed {
-                border: 1px solid var(--primary-color)
+                border-color: var(--primary-color);
             }
         }
     }

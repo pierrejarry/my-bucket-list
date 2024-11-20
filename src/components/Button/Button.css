@@ -1,86 +1,100 @@
 /* Button */
 
 button {
-    align-items: center;
-    color: white;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+  align-items: center;
+  color: white;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  transition: .5s all;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &.primary-btn {
+    background-color: var(--primary-color);
+
+    &:hover {
+      border-color: var(--primary-color);
+      opacity: .8;
+    }
+  }
+
+  &.secondary-btn {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+
+
+    &:hover {
+      border-color: #079992;
+      color: #079992;
+    }
+  }
+
+  &.add-btn {
+    background-color: var(--body-color);
+    border: 1px solid var(--body-color);
+    margin-top: 1rem;
     transition: .5s all;
-  
-    &.full-width {
-      width: 100%;
-    }
-  
-    &[disabled] {
-      opacity: 0.6;
-      pointer-events: none;
+
+    &:hover {
+      background-color: white;
+      color: var(--body-color);
     }
 
-    &.primary-btn {
-        background-color: var(--primary-color);
-      
-        &:hover {
-          border-color: var(--primary-color);
-          opacity: .8;
-        }
-      }
-      
-      &.secondary-btn {
-        background-color: white;
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
-        
-      
-        &:hover {
-          border-color: #079992;
-          color: #079992;
-        }
-      }
-
-      &.add-btn {
-        background-color: var(--body-color);
-        border: 1px solid var(--body-color);
-        margin-top: 1rem;
-        transition: .5s all;
-
-        &:hover {
-          background-color: white;
-          color: var(--body-color);
-        }
-      }
-
-      &.delete-btn {
-        background-color: white;
-        border: 1px solid var(--error-color);
-        color: var(--error-color);
-
-        &:hover {
-            background-color: var(--error-color);
-            color: white;
-          }
-      }
-
-      &.margin-left-auto {
-        margin-left: auto;
-      }
-
-      &.margin-right-auto {
-        margin-right: auto;
-      }
+    &:focus, &:focus-visible {
+      background-color: white;
+      color: var(--body-color);
+    }
   }
-  
+
+  &.delete-btn {
+    background-color: white;
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+
+    &:hover {
+      background-color: var(--error-color);
+      color: white;
+    }
+  }
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  margin: 4rem 0 0;
+
+  &.flex-start {
+    justify-content: flex-start;
+  }
+
+  &.flex-end {
+    justify-content: flex-end;
+  }
+}
+
+@media only screen and (min-width: 600px) {
   .btn-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin: 4rem 0 0;
+    flex-direction: row;
+  }
 
-    &.flex-start {
-        justify-content: flex-start;
+  button {
+    &.margin-left-auto {
+      margin-left: auto;
     }
-
-    &.flex-end {
-      justify-content: flex-end;
+  
+    &.margin-right-auto {
+      margin-right: auto;
+    }
   }
-  }
+}

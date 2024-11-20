@@ -13,6 +13,7 @@ function BucketList() {
         list,
         setList,
         setTitle,
+        setDescription,
         setShowToaster,
         setShowList,
         setModal
@@ -24,6 +25,7 @@ function BucketList() {
         sessionStorage.removeItem(sessionStorageName);
         setList([]);
         setTitle('');
+        setDescription('');
         setShowList(false);
         setModal({
             show: false,

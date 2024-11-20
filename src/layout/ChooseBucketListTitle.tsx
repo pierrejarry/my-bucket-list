@@ -23,7 +23,7 @@ function ChooseBucketListTitle() {
     return (
         <section>
             <h1>My Bucket List</h1>
-            <p>Create and track your life goals and adventures with our Bucket List app. Whether it's traveling the world, learning new skills, or achieving personal milestones, our app helps you organize, prioritize, and celebrate your dreams—all in one place!</p>
+            <p className="description">Create and track your life goals and adventures with our Bucket List app. Whether it's traveling the world, learning new skills, or achieving personal milestones, our app helps you organize, prioritize, and celebrate your dreams—all in one place!</p>
             <form>
                 <fieldset>
                     <label htmlFor='bucket-list-title'>Choose a name for your Bucket List</label>

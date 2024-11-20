@@ -1,5 +1,4 @@
 import './Button.css'
-import Add from '../assets/add.png'
 
 interface ButtonProps {
   type: 'primary' | 'secondary' | 'add' | 'delete'

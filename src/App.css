@@ -1,6 +1,5 @@
 section {
   margin: 0 auto;
-  max-width: 80%;
   width: 100%;
 }
 
@@ -49,8 +48,23 @@ form {
 
 .new-item-container {
   display: flex;
+  flex-direction: column;
   gap: .5rem;
   margin-top: 2rem;
+}
+
+/* Responsive */
+
+@media only screen and (min-width: 600px) {
+  .new-item-container {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  section {
+      max-width: 80%;
+  }
 }
 
 @media only screen and (min-width: 1200px) {

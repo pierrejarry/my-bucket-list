@@ -83,6 +83,7 @@
         }
     }
 
+    /* Checked status */
     input:checked~.checkmark {
         background-color: var(--primary-color);
         border-color: var(--primary-color);
@@ -90,6 +91,12 @@
 
     input:checked~.checkmark:after {
         display: block;
+    }
+
+    /* Focus status */
+    input:focus~.checkmark, input:focus-visible~.checkmark { 
+        outline-offset: 2px;
+        outline:  -webkit-focus-ring-color auto 1px;
     }
 }
 
