@@ -28,7 +28,7 @@ function Button({
   }
 
   // Generate the class name based on type and fullWidth
-  const buttonClass = `${typeClassMap[type]} ${fullWidth ? 'full-width' : ''} ${customClasses}`
+  const buttonClass = `${typeClassMap[type]} ${fullWidth ? 'full-width' : ''} ${customClasses ?? ''}`
 
   return (
     <button

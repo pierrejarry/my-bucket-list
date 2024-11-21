@@ -86,7 +86,7 @@ function BucketList() {
                     <>
                         <ul>
                             {list.map((item, index) =>
-                                <li key={index} className={item.checked ? 'completed' : ''}>
+                                <li key={index}>
                                     <CheckBox
                                         item={item}
                                         index={index}
