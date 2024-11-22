@@ -10,6 +10,11 @@ function ChooseBucketListTitle() {
         setShowList
     } = useBucketList();
 
+    const resetFields = () => {
+        setTitle('');
+        setDescription('');
+    }
+
     const showBucketList = () => {
         setShowList(title === '' ? false : true);
     }
@@ -24,7 +29,7 @@ function ChooseBucketListTitle() {
         <section>
             <h1>My Bucket List</h1>
             <p className="description">Create and track your life goals and adventures with our Bucket List app. Whether it's traveling the world, learning new skills, or achieving personal milestones, our app helps you organize, prioritize, and celebrate your dreams—all in one place!</p>
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <fieldset>
                     <label htmlFor='bucket-list-title'>Choose a name for your Bucket List</label>
                     <input
@@ -53,7 +58,7 @@ function ChooseBucketListTitle() {
                         type='secondary'
                         title='Empty textfield'
                         text='Reset'
-                        action={() => setTitle('')}
+                        action={resetFields}
                     />
                     <Button
                         type='primary'

@@ -59,4 +59,22 @@ describe('ChooseBucketListTitle component', () => {
 
         expect(validateButton).toBeEnabled();
     })
+
+    it('it clears the 2 text fields if the user wrote something and clicked on "Reset" button', async () => {
+        const { user } = setup();
+
+        /* Find 2 textfields and Reset button */
+        const titleField = screen.getByRole('textbox', { name: /choose a name/i });
+        const descriptionField = screen.getByRole('textbox', { name: /description/i });
+        const resetButton = screen.getByRole('button', { name: /reset/i });
+
+        /* User actions */
+        await user.type(titleField, 'title');
+        await user.type(descriptionField, 'description');
+        await user.click(resetButton);
+
+        /* Final result: text fields should be empty */
+        expect(titleField).toHaveValue('');
+        expect(descriptionField).toHaveValue('');
+    })
 })
