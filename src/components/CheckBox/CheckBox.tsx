@@ -43,7 +43,11 @@ function CheckBox({ item, index }: CheckBoxProps) {
         <>
             <label className={`container ${item.checked ? 'completed' : ''}`}>
                 {item.description}
-                <input type="checkbox" checked={item.checked} onChange={() => toggleCheck(index)} />
+                <input 
+                    type="checkbox" 
+                    checked={item.checked} 
+                    onChange={() => toggleCheck(index)} 
+                />
                 <span className="checkmark"></span>
                 {item.checked && <p className='completed'>Completed!</p>}
             </label>

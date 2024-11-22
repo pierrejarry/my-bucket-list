@@ -34,31 +34,33 @@ interface BucketListContextType {
 }
 
 // Create the context with a default value of undefined
-const BucketListContext = createContext<BucketListContextType | undefined>(undefined);
+export const BucketListContext = createContext<BucketListContextType | undefined>(undefined);
 
-export const BucketListProvider = ({ children }: { children: ReactNode }) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [list, setList] = useState<ListElement[]>([]);
-    const [showList, setShowList] = useState(false);
-    const [showToaster, setShowToaster] = useState(false);
-    const [modal, setModal] = useState<ModalProps>({
+export const BucketListProvider = ({ children, value }: { children: ReactNode, value?: Partial<BucketListContextType> }) => {
+    const [title, setTitle] = useState(value?.title || '');
+    const [description, setDescription] = useState(value?.description || '');
+    const [list, setList] = useState(value?.list || []);
+    const [showList, setShowList] = useState(value?.showList || false);
+    const [showToaster, setShowToaster] = useState(value?.showToaster || false);
+    const [modal, setModal] = useState(value?.modal || {
         show: false, 
         text: '', 
         hasButtons: false,
         action: () => {}
     });
 
-    useEffect(() => {
-        const storedBucketList = sessionStorage.getItem('myBucketList');
-        if (storedBucketList) {
-            const bucketList = JSON.parse(storedBucketList);
-            setList(bucketList.list);
-            setTitle(bucketList.title);
-            setDescription(bucketList.description);
-            setShowList(true);
+      useEffect(() => {
+        if (!value) {
+            const storedBucketList = sessionStorage.getItem('myBucketList');
+            if (storedBucketList) {
+                const bucketList = JSON.parse(storedBucketList);
+                setList(bucketList.list);
+                setTitle(bucketList.title);
+                setDescription(bucketList.description);
+                setShowList(true);
+            }
         }
-      }, []);
+    }, [value]);
 
     return (
         <BucketListContext.Provider value={{
