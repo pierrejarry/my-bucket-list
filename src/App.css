@@ -6,7 +6,7 @@ section {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
   width: 100%;
 }
@@ -35,6 +35,7 @@ form {
   fieldset {
     border: 0;
     margin-bottom: 1rem;
+    padding: 0;
   }
 
   label {
@@ -56,6 +57,10 @@ form {
 /* Responsive */
 
 @media only screen and (min-width: 600px) {
+  #root {
+    padding: 2rem;
+  }
+
   .new-item-container {
     flex-direction: row;
   }

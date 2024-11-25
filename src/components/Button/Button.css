@@ -85,7 +85,7 @@ button {
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  margin: 4rem 0 0;
+  margin: 3rem 0 0;
 
   &.flex-start {
     justify-content: flex-start;
@@ -99,6 +99,7 @@ button {
 @media only screen and (min-width: 600px) {
   .btn-container {
     flex-direction: row;
+    margin: 4rem 0 0;
   }
 
   button {
