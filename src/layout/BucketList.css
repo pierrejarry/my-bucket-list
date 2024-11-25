@@ -25,13 +25,26 @@
             border: 1px solid transparent;
             border-radius: .5rem;
             display: flex;
+            flex-direction: column;
             gap: .5rem;
             justify-content: space-between;
             margin-bottom: .5rem;
-            padding: .5rem;
+            padding: 0;
 
             &:last-child {
                 margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+/* Responsive */
+@media only screen and (min-width: 600px) {
+    .bucket-list {
+        ul {
+            li {
+                flex-direction: row;
+                padding: .5rem;
             }
         }
     }

@@ -13,6 +13,8 @@
     text-align: left;
     transition: .5s all;
     user-select: none;
+    width: 100%;
+    word-wrap: break-word;
 
     input {
         position: absolute;
@@ -124,4 +126,12 @@
     content: "";
     position: absolute;
     display: none;
+}
+
+/* Responsive */
+
+@media only screen and (min-width: 600px) {
+    .container {
+        width: auto;
+    }
 }

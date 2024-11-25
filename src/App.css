@@ -50,7 +50,7 @@ form {
 .new-item-container {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
@@ -63,6 +63,7 @@ form {
 
   .new-item-container {
     flex-direction: row;
+    gap: .5rem;
   }
 }
 
@@ -72,7 +73,7 @@ form {
   }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
   section {
       max-width: 60%;
   }
