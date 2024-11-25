@@ -25,6 +25,7 @@ interface BucketListContextType {
     temporaryList: ListElement[];
     showList: boolean;
     showToaster: boolean;
+    loading: boolean;
     modal: ModalProps;
     setTitle: Dispatch<SetStateAction<string>>;
     setDescription: Dispatch<SetStateAction<string>>;
@@ -32,6 +33,7 @@ interface BucketListContextType {
     setTemporaryList: Dispatch<SetStateAction<ListElement[]>>;
     setShowList: Dispatch<SetStateAction<boolean>>;
     setShowToaster: Dispatch<SetStateAction<boolean>>;
+    setLoading: Dispatch<SetStateAction<boolean>>;
     setModal: Dispatch<SetStateAction<ModalProps>>;
 }
 
@@ -45,6 +47,7 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
     const [temporaryList, setTemporaryList] = useState(value?.list || []);
     const [showList, setShowList] = useState(value?.showList || false);
     const [showToaster, setShowToaster] = useState(value?.showToaster || false);
+    const [loading, setLoading] = useState(true);
     const [modal, setModal] = useState(value?.modal || {
         show: false, 
         text: '', 
@@ -55,6 +58,7 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
       useEffect(() => {
         if (!value) {
             const storedBucketList = localStorage.getItem('myBucketList');
+
             if (storedBucketList) {
                 const bucketList = JSON.parse(storedBucketList);
                 setList(bucketList.list);
@@ -63,6 +67,8 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
                 setDescription(bucketList.description);
                 setShowList(true);
             }
+
+            setLoading(false);
         }
     }, [value]);
 
@@ -74,6 +80,7 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
             temporaryList,
             showList,
             showToaster,
+            loading,
             modal,
             setTitle,
             setDescription,
@@ -81,6 +88,7 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
             setTemporaryList,
             setShowList,
             setShowToaster,
+            setLoading,
             setModal
         }}>
             {children}

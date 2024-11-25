@@ -71,8 +71,7 @@
         height: 1.5rem;
         left: .5rem;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%); 
+        top: .5rem;
         transition: .5s all;
         width: 1.5rem;
 

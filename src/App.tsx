@@ -6,7 +6,9 @@ import Modal from './components/Modal/Modal';
 import './App.css'
 
 function App() {
-  const { showList, showToaster, modal } = useBucketList();
+  const { showList, showToaster, loading, modal } = useBucketList();
+
+  if (loading) return;
 
   return (
     <>
