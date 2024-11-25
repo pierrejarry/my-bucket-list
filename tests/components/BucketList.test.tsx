@@ -1,12 +1,23 @@
-import React from "react";
 import { render, screen } from '@testing-library/react';
 import { BucketListProvider } from "../../src/context/bucketListContext";
 import userEvent from "@testing-library/user-event";
 import BucketList from "../../src/layout/BucketList";
+import { ListElement } from '../../src/context/bucketListContext';
 
 describe('BucketList component', () => {
 
-    function setup(list) {
+    const list = [
+        {
+            checked: false,
+            description: 'First element'
+        },
+        {
+            checked: false,
+            description: 'Second element'
+        }
+    ]
+
+    function setup(list: ListElement[]) {
         render(
             <BucketListProvider
                 value={{
@@ -53,17 +64,6 @@ describe('BucketList component', () => {
     })
 
     it('it should show a list if the list from the context is not empty', async () => {
-        const list = [
-            {
-                checked: false,
-                description: 'First element'
-            },
-            {
-                checked: false,
-                description: 'Second element'
-            }
-        ]
-
         setup(list);
         
         list.forEach(element => {
@@ -72,6 +72,20 @@ describe('BucketList component', () => {
 
         /* Shows a "Remove element button" for each list item */
         expect(screen.getAllByRole('button', {name: /remove/i})).toHaveLength(2);
+    })
+
+    it('it should show a set of 3 buttons if the list is not empty', async () => {
+        setup(list);
+        
+        /* Delete button */
+        expect(screen.getByRole('button', {name: /delete/i})).toBeInTheDocument();
+        
+        /* Cancel button */
+        expect(screen.getByRole('button', {name: /cancel/i})).toBeInTheDocument();
+        
+        /* Save button */
+        expect(screen.getByRole('button', {name: /save/i})).toBeInTheDocument();
+        
     })
 
 })

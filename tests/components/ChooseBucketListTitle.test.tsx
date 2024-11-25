@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ChooseBucketListTitle from '../../src/layout/ChooseBucketListTitle';
 import { BucketListProvider } from '../../src/context/bucketListContext';
