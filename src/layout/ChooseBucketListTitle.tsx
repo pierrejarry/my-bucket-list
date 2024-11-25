@@ -16,11 +16,11 @@ function ChooseBucketListTitle() {
     }
 
     const showBucketList = () => {
-        setShowList(title === '' ? false : true);
+        setShowList(true);
     }
 
     const showBucketListOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode !== 13) return;
+        if (e.key !== 'Enter') return;
         e.preventDefault();
         showBucketList();
     }
@@ -59,13 +59,14 @@ function ChooseBucketListTitle() {
                         title='Empty textfield'
                         text='Reset'
                         action={resetFields}
+                        disabled={!title}
                     />
                     <Button
                         type='primary'
                         title='Validate title'
                         text='Validate'
-                        disabled={title === ''}
                         action={showBucketList}
+                        disabled={!title}
                     />
                 </div>
             </form>

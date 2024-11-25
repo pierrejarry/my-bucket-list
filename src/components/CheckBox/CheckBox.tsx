@@ -7,10 +7,10 @@ interface CheckBoxProps {
 }
 
 function CheckBox({ item, index }: CheckBoxProps) {
-    const { list, setList, setModal } = useBucketList();
+    const { temporaryList, setTemporaryList, setModal } = useBucketList();
 
     const toggleCheck = (indexToUpdate: number) => {
-        setList((prevList) =>
+        setTemporaryList((prevList) =>
             prevList.map((item, index) =>
                 index === indexToUpdate
                     ? { ...item, checked: !item.checked }
@@ -20,8 +20,8 @@ function CheckBox({ item, index }: CheckBoxProps) {
     }
 
     const removeElementFromBucketList = (item: ListElement) => {
-        const newBucketList = list.filter(elem => elem !== item);
-        setList(newBucketList);
+        const newBucketList = temporaryList.filter(elem => elem !== item);
+        setTemporaryList(newBucketList);
         setModal(prevModal => ({
             ...prevModal,
             show: false,

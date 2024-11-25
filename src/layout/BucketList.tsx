@@ -1,5 +1,4 @@
-import { useMemo } from "react";
-import { ListElement, useBucketList } from "../context/bucketListContext"
+import { useBucketList } from "../context/bucketListContext"
 import AddNewItem from "./AddNewItem";
 import CheckBox from "../components/CheckBox/CheckBox";
 import NoTask from '../assets/no-task.png'
@@ -11,18 +10,19 @@ function BucketList() {
         title,
         description,
         list,
+        temporaryList,
         setList,
+        setTemporaryList,
         setTitle,
         setDescription,
         setShowToaster,
         setShowList,
         setModal
     } = useBucketList();
-    const previousList: ListElement[] = useMemo(() => list, []);
-    const sessionStorageName = 'myBucketList';
+    const localStorageName = 'myBucketList';
 
-    const removeBucketListFromSessionStorage = () => {
-        sessionStorage.removeItem(sessionStorageName);
+    const removeBucketListFromLocalStorage = () => {
+        localStorage.removeItem(localStorageName);
         setList([]);
         setTitle('');
         setDescription('');
@@ -31,7 +31,7 @@ function BucketList() {
             show: false,
             text: '',
             hasButtons: false,
-            action: () => {}
+            action: () => { }
         })
     }
 
@@ -39,9 +39,10 @@ function BucketList() {
         const bucketListToSave = {
             title,
             description,
-            list
+            list: temporaryList
         }
-        sessionStorage.setItem(sessionStorageName, JSON.stringify(bucketListToSave));
+        localStorage.setItem(localStorageName, JSON.stringify(bucketListToSave));
+        setList(temporaryList);
         setShowToaster(true); // Show toaster
         setTimeout(() => { // Reinitialize toaster to false
             setShowToaster(false);
@@ -49,12 +50,17 @@ function BucketList() {
     }
 
     const cancelChanges = () => {
-        setList(previousList);
+        setTemporaryList(list);
 
-        if (!previousList.length) {
-            sessionStorage.removeItem(sessionStorageName);
+        if (!list.length) {
+            localStorage.removeItem(localStorageName);
         } else {
-            sessionStorage.setItem(sessionStorageName, JSON.stringify(previousList));
+            const bucketListToSave = {
+                title,
+                description,
+                list
+            }
+            localStorage.setItem(localStorageName, JSON.stringify(bucketListToSave));
         }
     }
 
@@ -63,7 +69,7 @@ function BucketList() {
             show: true,
             text: 'Are you sure you want to delete your Bucket List?',
             hasButtons: true,
-            action: removeBucketListFromSessionStorage
+            action: removeBucketListFromLocalStorage
         })
     }
 
@@ -75,25 +81,27 @@ function BucketList() {
             </header>
             <main>
                 <AddNewItem />
-                {!list.length &&
+
+                {!temporaryList.length ? (
                     <div className="empty-list">
                         <img src={NoTask} className="empty-icon" alt="Empty list icon" />
                         <h2>Your Bucket List is empty!</h2>
                         <p className="description">Start your journey by adding your first dream or goal! Big or small, every item is a step towards making your bucket list truly yours. What’s the first adventure you’d love to check off?</p>
                     </div>
-                }
-                {list.length > 0 &&
+                ) : (
+                    <ul>
+                        {temporaryList.map((item, index) =>
+                            <li key={index}>
+                                <CheckBox
+                                    item={item}
+                                    index={index}
+                                />
+                            </li>
+                        )}
+                    </ul>
+                )}
+                {(list.length > 0 || (temporaryList.length > 0 && !list.length)) && (
                     <>
-                        <ul>
-                            {list.map((item, index) =>
-                                <li key={index}>
-                                    <CheckBox
-                                        item={item}
-                                        index={index}
-                                    />
-                                </li>
-                            )}
-                        </ul>
                         <div className='btn-container flex-end'>
                             {/* Remove Bucket List */}
                             <Button
@@ -109,6 +117,7 @@ function BucketList() {
                                 text='Cancel changes'
                                 title="Cancel changes button"
                                 action={cancelChanges}
+                                disabled={list === temporaryList}
                             />
                             {/* Save changes */}
                             <Button
@@ -119,7 +128,7 @@ function BucketList() {
                             />
                         </div>
                     </>
-                }
+                )}
             </main>
         </section>
     )
