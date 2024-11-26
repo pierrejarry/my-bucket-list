@@ -25,10 +25,9 @@
         padding: 0;
 
         li {
-            align-items: flex-start;
+            align-items: stretch;
             border-bottom: 1px solid var(--border-color);
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
             padding: 0;
             transition: .5s all;
@@ -37,8 +36,15 @@
                 background-color: var(--light-grey-background);
             }
 
+            &:first-child {
+                border-top-left-radius: .5rem;
+                border-top-right-radius: .5rem;            
+            }
+
             &:last-child {
                 border-bottom: none;
+                border-bottom-left-radius: .5rem;
+                border-bottom-right-radius: .5rem;
             }
 
             label {
@@ -47,27 +53,52 @@
 
             /* Remove part */
             .remove-element {
-                button {
-                    background-color: transparent;
+                padding: 1rem;
+            }
 
-                    .remove-icon {
-                        height: 2rem;
-                        width: 2rem;
+            /* Completed state */
+
+            &.completed {
+                background-color: var(--primary-color);
+                border-color: white;
+                color: white;
+
+                label {
+                    border-color: white;
+                }
+
+                .remove-button {
+                    border-color: white;
+
+                    span {
+                        &:before,
+                        &:after {
+                            background-color: white;
+                        }
                     }
+
+                    &:hover {
+                        background-color: white;
+
+                        span {
+                            &:before,
+                            &:after {
+                                background-color: var(--primary-color);
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-color: rgba(56, 173, 169, 0.7);
                 }
             }
         }
     }
-}
 
-/* Responsive */
-@media only screen and (min-width: 600px) {
-    .bucket-list {
-        ul {
-            li {
-                align-items: stretch;
-                flex-direction: row;
-            }
+    @media only screen and (max-width: 599px) {
+        .btn-container {
+            flex-direction: column-reverse;
         }
     }
 }

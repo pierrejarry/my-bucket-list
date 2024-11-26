@@ -2,7 +2,7 @@ import { useBucketList } from "../context/bucketListContext"
 import AddNewItem from "./AddNewItem";
 import CheckBox from "../components/CheckBox/CheckBox";
 import Button from "../components/Button/Button";
-import { ListElement } from "../context/bucketListContext";
+import RemoveButton from "../components/RemoveButton/RemoveButton";
 import NoTask from '../assets/no-task.png'
 import Remove from '../assets/remove.png'
 import './BucketList.css'
@@ -34,27 +34,6 @@ function BucketList() {
             text: '',
             hasButtons: false,
             action: () => { }
-        })
-    }
-
-    /* List Element */
-    const removeElementFromBucketList = (item: ListElement) => {
-        const newBucketList = temporaryList.filter(elem => elem !== item);
-        setTemporaryList(newBucketList);
-        setModal(prevModal => ({
-            ...prevModal,
-            show: false,
-            hasButtons: false,
-            action: () => { }
-        }))
-    }
-
-    const removeElement = (item: ListElement) => {
-        setModal({
-            show: true,
-            text: 'Are you sure you want to remove this element from your list?',
-            hasButtons: true,
-            action: () => removeElementFromBucketList(item)
         })
     }
 
@@ -114,15 +93,13 @@ function BucketList() {
                 ) : (
                     <ul>
                         {temporaryList.map((item, index) =>
-                            <li key={index}>
+                            <li key={index} className={item.checked ? 'completed' : ''}>
                                 <CheckBox
                                     item={item}
                                     index={index}
                                 />
                                 <article className='remove-element'>
-                                    <button onClick={() => removeElement(item)} title='Remove element'>
-                                        <img src={Remove} alt='Remove icon' className="remove-icon" />
-                                    </button>
+                                    <RemoveButton item={item} />
                                 </article>
                             </li>
                         )}

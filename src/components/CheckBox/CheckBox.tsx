@@ -28,7 +28,6 @@ function CheckBox({ item, index }: CheckBoxProps) {
                     onChange={() => toggleCheck(index)}
                 />
                 <span className="checkmark"></span>
-                {item.checked && <p className='completed'>Completed!</p>}
             </label>
     )
 }
