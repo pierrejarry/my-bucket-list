@@ -3,11 +3,10 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    border: 1px solid transparent;
-    border-radius: .5rem;
-    display: block;
+    align-items: center;
+    display: flex;
     position: relative;
-    padding: .5rem .5rem .5rem 3rem;
+    padding: .5rem .5rem .5rem 3.5rem;
     cursor: pointer;
     flex: 1 1 auto;
     text-align: left;
@@ -71,9 +70,9 @@
         border: 1px solid var(--body-color);
         border-radius: .4rem;
         height: 1.5rem;
-        left: .5rem;
+        left: 1rem;
         position: absolute;
-        top: .5rem;
+        top: 1rem;
         transition: .5s all;
         width: 1.5rem;
 
@@ -92,13 +91,6 @@
     
     /* Hover state */
     &:hover {
-        border-color: var(--border-color);
-
-        .info {
-            opacity: 1;
-            visibility: visible;
-        }
-
         input~.checkmark {
             border-color: var(--primary-color);
         }

@@ -99,7 +99,6 @@ button {
 @media only screen and (min-width: 600px) {
   .btn-container {
     flex-direction: row;
-    margin: 4rem 0 0;
   }
 
   button {
