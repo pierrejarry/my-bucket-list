@@ -1,11 +1,11 @@
-import { 
-    createContext, 
-    useContext, 
-    ReactNode, 
+import {
+    createContext,
+    useContext,
+    ReactNode,
     useEffect,
-    useState, 
-    Dispatch, 
-    SetStateAction } from "react";
+    useReducer,
+    Dispatch
+} from "react";
 
 // Define types
 export interface ListElement {
@@ -16,81 +16,103 @@ interface ModalProps {
     show: boolean,
     text: string,
     hasButtons: boolean,
-    action: () => void 
+    action: () => void
 }
+
+interface BucketListType {
+    title: string,
+    description: string,
+    list: ListElement[],
+    temporaryList: ListElement[],
+    showList: boolean,
+    showToaster: boolean,
+    modal: ModalProps
+}
+
+type Action =
+    { type: 'SET_TITLE'; payload: string }
+    | { type: 'SET_DESCRIPTION'; payload: string }
+    | { type: 'SET_LIST'; payload: ListElement[] }
+    | { type: 'SET_TEMPORARY_LIST'; payload: ListElement[] }
+    | { type: 'SET_SHOW_LIST'; payload: boolean }
+    | { type: 'SET_SHOW_TOASTER'; payload: boolean }
+    | { type: 'SET_MODAL'; payload: { show: boolean; text: string; hasButtons: boolean; action: () => void } }
+    | { type: 'RESET_STATE' }
+
 interface BucketListContextType {
-    title: string;
-    description: string;
-    list: ListElement[];
-    temporaryList: ListElement[];
-    showList: boolean;
-    showToaster: boolean;
-    loading: boolean;
-    modal: ModalProps;
-    setTitle: Dispatch<SetStateAction<string>>;
-    setDescription: Dispatch<SetStateAction<string>>;
-    setList: Dispatch<SetStateAction<ListElement[]>>;
-    setTemporaryList: Dispatch<SetStateAction<ListElement[]>>;
-    setShowList: Dispatch<SetStateAction<boolean>>;
-    setShowToaster: Dispatch<SetStateAction<boolean>>;
-    setLoading: Dispatch<SetStateAction<boolean>>;
-    setModal: Dispatch<SetStateAction<ModalProps>>;
+    state: BucketListType,
+    dispatch: Dispatch<Action>,
+    hideModal: () => void
 }
+
+const initialState: BucketListType = {
+    title: '',
+    description: '',
+    list: [],
+    temporaryList: [],
+    showList: false,
+    showToaster: false,
+    modal: {
+        show: false,
+        text: '',
+        hasButtons: false,
+        action: () => { }
+    }
+};
+
+const reducer = (state: typeof initialState, action: Action) => {
+    switch (action.type) {
+        case 'SET_TITLE':
+            return { ...state, title: action.payload };
+        case 'SET_DESCRIPTION':
+            return { ...state, description: action.payload };
+        case 'SET_LIST':
+            return { ...state, list: action.payload };
+        case 'SET_TEMPORARY_LIST':
+            return { ...state, temporaryList: action.payload };
+        case 'SET_SHOW_LIST':
+            return { ...state, showList: action.payload };
+        case 'SET_SHOW_TOASTER':
+            return { ...state, showToaster: action.payload };
+        case 'SET_MODAL':
+            return { ...state, modal: action.payload };
+        case 'RESET_STATE':
+            return { ...initialState };
+        default:
+            return state;
+    }
+};
 
 // Create the context with a default value of undefined
 export const BucketListContext = createContext<BucketListContextType | undefined>(undefined);
 
-export const BucketListProvider = ({ children, value }: { children: ReactNode, value?: Partial<BucketListContextType> }) => {
-    const [title, setTitle] = useState(value?.title || '');
-    const [description, setDescription] = useState(value?.description || '');
-    const [list, setList] = useState(value?.list || []);
-    const [temporaryList, setTemporaryList] = useState(value?.list || []);
-    const [showList, setShowList] = useState(value?.showList || false);
-    const [showToaster, setShowToaster] = useState(value?.showToaster || false);
-    const [loading, setLoading] = useState(true);
-    const [modal, setModal] = useState(value?.modal || {
-        show: false, 
-        text: '', 
-        hasButtons: false,
-        action: () => {}
-    });
+export const BucketListProvider = ({ children, value }: { children: ReactNode, value?: Partial<BucketListType> }) => {
+    const [state, dispatch] = useReducer(reducer, { ...initialState, ...value });
 
-      useEffect(() => {
+    const hideModal = () => {
+        dispatch({
+            type: 'SET_MODAL',
+            payload: { ...state.modal, show: false }
+        })
+    }
+
+    useEffect(() => {
         if (!value) {
             const storedBucketList = localStorage.getItem('myBucketList');
 
             if (storedBucketList) {
                 const bucketList = JSON.parse(storedBucketList);
-                setList(bucketList.list);
-                setTemporaryList(bucketList.list);
-                setTitle(bucketList.title);
-                setDescription(bucketList.description);
-                setShowList(true);
+                dispatch({ type: "SET_LIST", payload: bucketList.list });
+                dispatch({ type: "SET_TEMPORARY_LIST", payload: bucketList.list });
+                dispatch({ type: "SET_TITLE", payload: bucketList.title });
+                dispatch({ type: "SET_DESCRIPTION", payload: bucketList.description });
+                dispatch({ type: "SET_SHOW_LIST", payload: true });
             }
-
-            setLoading(false);
         }
     }, [value]);
 
     return (
-        <BucketListContext.Provider value={{
-            title,
-            description,
-            list,
-            temporaryList,
-            showList,
-            showToaster,
-            loading,
-            modal,
-            setTitle,
-            setDescription,
-            setList,
-            setTemporaryList,
-            setShowList,
-            setShowToaster,
-            setLoading,
-            setModal
-        }}>
+        <BucketListContext.Provider value={{ state, dispatch, hideModal }}>
             {children}
         </BucketListContext.Provider>
     )

@@ -4,37 +4,20 @@ import CheckBox from "../components/CheckBox/CheckBox";
 import Button from "../components/Button/Button";
 import RemoveButton from "../components/RemoveButton/RemoveButton";
 import NoTask from '../assets/no-task.png'
-import Remove from '../assets/remove.png'
 import './BucketList.css'
 
 function BucketList() {
-    const {
-        title,
+    const { state, dispatch } = useBucketList();
+    const { title,
         description,
         list,
-        temporaryList,
-        setList,
-        setTemporaryList,
-        setTitle,
-        setDescription,
-        setShowToaster,
-        setShowList,
-        setModal
-    } = useBucketList();
+        temporaryList
+    } = state;
     const localStorageName = 'myBucketList';
 
     const removeBucketListFromLocalStorage = () => {
         localStorage.removeItem(localStorageName);
-        setList([]);
-        setTitle('');
-        setDescription('');
-        setShowList(false);
-        setModal({
-            show: false,
-            text: '',
-            hasButtons: false,
-            action: () => { }
-        })
+        dispatch({ type: 'RESET_STATE' });
     }
 
     const saveList = () => {
@@ -44,15 +27,28 @@ function BucketList() {
             list: temporaryList
         }
         localStorage.setItem(localStorageName, JSON.stringify(bucketListToSave));
-        setList(temporaryList);
-        setShowToaster(true); // Show toaster
+        dispatch({
+            type: 'SET_LIST',
+            payload: temporaryList
+        });
+        dispatch({
+            type: 'SET_SHOW_TOASTER',
+            payload: true
+        });
+        
         setTimeout(() => { // Reinitialize toaster to false
-            setShowToaster(false);
+            dispatch({
+                type: 'SET_SHOW_TOASTER',
+                payload: false
+            });
         }, 1500);
     }
 
     const cancelChanges = () => {
-        setTemporaryList(list);
+        dispatch({
+            type: 'SET_TEMPORARY_LIST',
+            payload: list
+        });
 
         if (!list.length) {
             localStorage.removeItem(localStorageName);
@@ -67,12 +63,15 @@ function BucketList() {
     }
 
     const deleteBucketList = () => {
-        setModal({
-            show: true,
-            text: 'Are you sure you want to delete your Bucket List?',
-            hasButtons: true,
-            action: removeBucketListFromLocalStorage
-        })
+        dispatch({
+            type: 'SET_MODAL',
+            payload: {
+                show: true,
+                text: 'Are you sure you want to delete your Bucket List?',
+                hasButtons: true,
+                action: removeBucketListFromLocalStorage
+            }
+        });
     }
 
     return (

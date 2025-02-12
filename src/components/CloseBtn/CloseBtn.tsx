@@ -2,16 +2,13 @@ import './CloseBtn.css'
 import { useBucketList } from '../../context/bucketListContext'
 
 function CloseBtn() {
-    const { setModal } = useBucketList();
+    const { hideModal } = useBucketList();
 
     return (
         <button 
             className='closeBtn' 
             title="Close icon"
-            onClick={() => setModal( prevState => ({
-                ...prevState,
-                show: false
-            }))}
+            onClick={hideModal}
         ></button>
     )
 }

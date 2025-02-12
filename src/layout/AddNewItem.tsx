@@ -3,7 +3,7 @@ import { useBucketList } from "../context/bucketListContext";
 import Button from "../components/Button/Button"
 
 function AddNewItem() {
-    const { setTemporaryList } = useBucketList();
+    const { state, dispatch } = useBucketList();
     const [elementDescription, setElementDescription] = useState('');
     const [showNewItem, setShowNewItem] = useState(false);
 
@@ -12,11 +12,14 @@ function AddNewItem() {
             checked: false,
             description: elementDescription
         }
-        setTemporaryList( prevList => [
-            newItem,
-            ...prevList
-            
-        ]);
+        dispatch({
+            type: 'SET_TEMPORARY_LIST',
+            payload: [
+                newItem,
+                ...state.temporaryList
+                
+            ]
+        })
         setShowNewItem(false);
         setElementDescription('');
     }

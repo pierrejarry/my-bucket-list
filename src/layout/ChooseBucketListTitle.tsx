@@ -2,27 +2,44 @@ import { useBucketList } from "../context/bucketListContext"
 import Button from "../components/Button/Button";
 
 function ChooseBucketListTitle() {
-    const {
-        title,
-        description,
-        setTitle,
-        setDescription,
-        setShowList
-    } = useBucketList();
+    const { state, dispatch } = useBucketList();
 
     const resetFields = () => {
-        setTitle('');
-        setDescription('');
+        dispatch({
+            type: 'SET_TITLE',
+            payload: ''
+        });
+        dispatch({
+            type: 'SET_DESCRIPTION',
+            payload: ''
+        });
     }
 
     const showBucketList = () => {
-        setShowList(true);
+        dispatch({
+            type: 'SET_SHOW_LIST',
+            payload: true
+        });        
     }
 
     const showBucketListOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key !== 'Enter') return;
         e.preventDefault();
         showBucketList();
+    }
+
+    const setBucketListName = (name: string) => {
+        dispatch({
+            type: 'SET_TITLE',
+            payload: name
+        });
+    }
+
+    const setBucketListDescription = (description: string) => {
+        dispatch({
+            type: 'SET_DESCRIPTION',
+            payload: description
+        });
     }
 
     return (
@@ -37,8 +54,8 @@ function ChooseBucketListTitle() {
                         id='bucket-list-title'
                         className='input'
                         placeholder='Example: My Bucket List'
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        value={state.title}
+                        onChange={e => setBucketListName(e.target.value)}
                         onKeyDown={showBucketListOnEnter}
                     />
                 </fieldset>
@@ -49,8 +66,8 @@ function ChooseBucketListTitle() {
                         id='bucket-list-description'
                         className='input'
                         placeholder='Example: The things I want to do for this new year'
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
+                        value={state.description}
+                        onChange={e => setBucketListDescription(e.target.value)}
                     />
                 </fieldset>
                 <div className='btn-container'>
@@ -59,14 +76,14 @@ function ChooseBucketListTitle() {
                         title='Empty textfield'
                         text='Reset'
                         action={resetFields}
-                        disabled={!title}
+                        disabled={!state.title}
                     />
                     <Button
                         type='primary'
                         title='Validate title'
                         text='Validate'
                         action={showBucketList}
-                        disabled={!title}
+                        disabled={!state.title}
                     />
                 </div>
             </form>

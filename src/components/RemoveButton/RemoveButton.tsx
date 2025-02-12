@@ -2,33 +2,43 @@ import { ListElement } from "../../context/bucketListContext";
 import { useBucketList } from "../../context/bucketListContext";
 import './RemoveButton.css'
 
-function RemoveButton({item}: {item: ListElement}) {
-    const { temporaryList, setTemporaryList, setModal } = useBucketList();
+function RemoveButton({ item }: { item: ListElement }) {
+    const { state, dispatch } = useBucketList();
 
     /* Remove element */
     const removeElementFromBucketList = (item: ListElement) => {
-        const newBucketList = temporaryList.filter(elem => elem !== item);
-        setTemporaryList(newBucketList);
-        setModal(prevModal => ({
-            ...prevModal,
-            show: false,
-            hasButtons: false,
-            action: () => { }
-        }))
+        const newBucketList = state.temporaryList.filter(elem => elem !== item);
+        dispatch({
+            type: 'SET_TEMPORARY_LIST',
+            payload: newBucketList
+        })
+        dispatch({
+            type: 'SET_MODAL',
+            payload: {
+                ...state.modal,
+                show: false,
+                hasButtons: false,
+                action: () => { }
+            }
+        })
     }
 
     const removeElement = (item: ListElement) => {
-        setModal({
-            show: true,
-            text: 'Are you sure you want to remove this element from your list?',
-            hasButtons: true,
-            action: () => removeElementFromBucketList(item)
+        dispatch({
+            type: 'SET_MODAL',
+            payload: {
+                ...state.modal,
+                show: true,
+                text: 'Are you sure you want to remove this element from your list?',
+                hasButtons: true,
+                action: () => removeElementFromBucketList(item)
+            }
         })
     }
 
     return (
-        <button 
-            onClick={() => removeElement(item)} 
+        <button
+            onClick={() => removeElement(item)}
             title='Remove element'
             className="remove-button"
         >
@@ -37,4 +47,4 @@ function RemoveButton({item}: {item: ListElement}) {
     )
 }
 
-export default RemoveButton/*  */
+export default RemoveButton

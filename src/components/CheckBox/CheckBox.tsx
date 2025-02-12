@@ -7,16 +7,15 @@ interface CheckBoxProps {
 }
 
 function CheckBox({ item, index }: CheckBoxProps) {
-    const { setTemporaryList } = useBucketList();
+    const { state, dispatch } = useBucketList();
 
     const toggleCheck = (indexToUpdate: number) => {
-        setTemporaryList((prevList) =>
-            prevList.map((item, index) =>
-                index === indexToUpdate
-                    ? { ...item, checked: !item.checked }
-                    : item
-            )
-        );
+        dispatch({
+            type: "SET_TEMPORARY_LIST",
+            payload: state.temporaryList.map((item, index) =>
+              index === indexToUpdate ? { ...item, checked: !item.checked } : item
+            ),
+          });
     }
 
     return (

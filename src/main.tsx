@@ -7,7 +7,7 @@ import App from './App.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BucketListProvider>
-    <App />
+      <App />
     </BucketListProvider>
   </StrictMode>,
 )

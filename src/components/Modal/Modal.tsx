@@ -10,14 +10,7 @@ interface ModalProps {
 }
 
 function Modal({ show, text, hasButtons }: ModalProps) {
-    const { modal, setModal } = useBucketList();
-
-    const hideModal = () => {
-        setModal(prevState => ({
-            ...prevState,
-            show: false
-        }))
-    }
+    const { state, hideModal } = useBucketList();
 
     if (!show) return;
 
@@ -41,7 +34,7 @@ function Modal({ show, text, hasButtons }: ModalProps) {
                             type='primary'
                             text='Confirm'
                             title="Confirm"
-                            action={modal.action}
+                            action={state.modal.action}
                         />
                     </div>
                 }
