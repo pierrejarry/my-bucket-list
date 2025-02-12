@@ -20,9 +20,15 @@ describe('BucketList component', () => {
     function setup(list: ListElement[]) {
         render(
             <BucketListProvider
-                value={{
-                    list: list
-                }}
+            value={{
+                title: 'My new Bucket list for 2025',
+                description: 'Description of my new Bucket list',
+                list: list,
+                temporaryList: list,
+                showList: false,
+                showToaster: false,
+                modal: { show: false, text: '', hasButtons: false, action: () => {} }
+            }}
             >
                 <BucketList />
             </BucketListProvider>
@@ -63,6 +69,18 @@ describe('BucketList component', () => {
         expect(okBtn).toBeInTheDocument();
     })
 
+    it('should show the name of the bucketlist and its description if the context is not empty', () => {
+        setup(list);
+
+        const title = screen.getByRole('heading', { level: 1});
+        expect(title).toBeInTheDocument();
+        expect(title).toHaveTextContent('My new Bucket list for 2025');
+
+        const description = screen.getByText('Description of my new Bucket list');
+        expect(description).toBeInTheDocument();
+        
+    });
+
     it('it should show a list if the list from the context is not empty', async () => {
         setup(list);
         
@@ -85,7 +103,6 @@ describe('BucketList component', () => {
         
         /* Save button */
         expect(screen.getByRole('button', {name: /save/i})).toBeInTheDocument();
-        
     })
 
 })

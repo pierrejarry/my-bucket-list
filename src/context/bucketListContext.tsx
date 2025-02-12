@@ -30,7 +30,8 @@ interface BucketListType {
 }
 
 type Action =
-    { type: 'SET_TITLE'; payload: string }
+      { type: 'INITIALIZE_STATE'; payload: BucketListType }      
+    | { type: 'SET_TITLE'; payload: string }
     | { type: 'SET_DESCRIPTION'; payload: string }
     | { type: 'SET_LIST'; payload: ListElement[] }
     | { type: 'SET_TEMPORARY_LIST'; payload: ListElement[] }
@@ -62,6 +63,8 @@ const initialState: BucketListType = {
 
 const reducer = (state: typeof initialState, action: Action) => {
     switch (action.type) {
+        case 'INITIALIZE_STATE':
+            return { ...state, ...action.payload };
         case 'SET_TITLE':
             return { ...state, title: action.payload };
         case 'SET_DESCRIPTION':
@@ -97,16 +100,17 @@ export const BucketListProvider = ({ children, value }: { children: ReactNode, v
     }
 
     useEffect(() => {
-        if (!value) {
+        if (value) {
+            dispatch({ type: 'INITIALIZE_STATE', payload: {...initialState, ...value }});
+        } else {
             const storedBucketList = localStorage.getItem('myBucketList');
-
             if (storedBucketList) {
                 const bucketList = JSON.parse(storedBucketList);
-                dispatch({ type: "SET_LIST", payload: bucketList.list });
-                dispatch({ type: "SET_TEMPORARY_LIST", payload: bucketList.list });
-                dispatch({ type: "SET_TITLE", payload: bucketList.title });
-                dispatch({ type: "SET_DESCRIPTION", payload: bucketList.description });
-                dispatch({ type: "SET_SHOW_LIST", payload: true });
+                dispatch({ type: 'SET_LIST', payload: bucketList.list });
+                dispatch({ type: 'SET_TEMPORARY_LIST', payload: bucketList.list });
+                dispatch({ type: 'SET_TITLE', payload: bucketList.title });
+                dispatch({ type: 'SET_DESCRIPTION', payload: bucketList.description });
+                dispatch({ type: 'SET_SHOW_LIST', payload: true });
             }
         }
     }, [value]);
