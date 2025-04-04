@@ -6,6 +6,6 @@ export default defineConfig({
   base: '/my-bucket-list/',
   build: {
     assetsDir: 'assets',
-    outDir: 'dist'
+    outDir: 'dist',
   }
 })
